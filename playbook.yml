@@ -1,0 +1,41 @@
+---
+- hosts: all
+  become: true
+  become_method: sudo
+
+#  vars:
+#    document_root: /vagrant
+
+#  roles:
+#    - database
+#    - webserver
+
+  tasks:
+
+    - name install ansible
+      apt: name={{ item }} state=present
+      with_items:
+        - ansible
+        - python2-dnf
+
+    - name install mp3 support
+      apt: name={{ item }} state=present
+      with_items:
+        - ffmpeg
+        - libavdevice
+
+    - name install video support
+      apt: name=vlc state=present
+
+    - name install virtualbox support
+      apt: name={{ item }} state=present
+      with_items:
+        - dkms
+        - kernel-devel
+        - VirtualBox-5.1
+
+    - name install vagrant support
+      apt: name=vagrant-libvirt state=present
+
+    - name: upgrade all packages
+      dnf: name=* state=latest
