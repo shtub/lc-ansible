@@ -6,6 +6,12 @@
     - python2-dnf
     - libselinux-python
 
+- name: fusion rpms
+  dnf: name=http://download1.rpmfusion.org/{{ item }}/fedora/rpmfusion-{{ item }}-release-{{ release }}.noarch.rpm state=present
+  with_items:
+    - free
+    - nonfree
+
 - name: install mp3 support
   dnf: name={{ item }} state=present
   with_items:
@@ -33,6 +39,9 @@
     - gstreamer1-plugins-good
     - gstreamer1-plugins-base
     - gstreamer1
+
+- name: add vbox config repo
+  command: dnf config-manager --add-repo=http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
 
 - name: install virtualbox support
   dnf: name={{ item }} state=present
