@@ -1,2 +1,2 @@
 all:
-	ansible-playbook -i hosts playbook.yml
+	ansible-playbook -i hosts playbook.yml --skip-tags upgrades

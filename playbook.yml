@@ -1,29 +1,27 @@
---
+---
 
 - hosts: all
   become: true
   become_method: sudo
 
   tasks:
-    - name install video support
-      dnf: name=vlc state=latest
 
-    - name install ansible
-      dnf: name="{{ item }}" state=present
+    - name: install ansible
+      dnf: name={{ item }} state=present
       with_items:
         - ansible
         - python2-dnf
 
-    - name install mp3 support
+    - name: install mp3 support
       dnf: name={{ item }} state=present
       with_items:
         - ffmpeg
         - libavdevice
 
-    - name install video support
+    - name: install video support
       dnf: name=vlc state=present
 
-    - name install media streaming
+    - name: install media streaming
       dnf: name={{ item }} state=present
       with_items:
         - gstreamer-plugins-bad
@@ -42,28 +40,33 @@
         - gstreamer1-plugins-base
         - gstreamer1
 
-    - name install virtualbox support
+    - name: install virtualbox support
       dnf: name={{ item }} state=present
       with_items:
         - dkms
         - kernel-devel
         - VirtualBox-5.1
 
-    - name install vagrant support
+    - name: install vagrant support
       dnf: name=vagrant-libvirt state=present
 
-    - name install miscellaneous dev packages
+    - name: install miscellaneous dev packages
       dnf: name={{ item }} state=present
       with_items:
         - golang
         - unrar
         - vim-enhanced
 
-    - name install miscellaneous workstation tools
+    - name: install miscellaneous workstation tools
       dnf: name={{ item }} state=present
       with_items:
-        - gnome-tweak-tools
+        - gnome-tweak-tool
         - xclip
+
+    - name: install video support
+      dnf: name=vlc state=present
 
     - name: upgrade all packages
       dnf: name=* state=latest
+      tags:
+          - upgrades
