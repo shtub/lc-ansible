@@ -1,0 +1,24 @@
+---
+- name: install dotfiles
+  git:
+    name=https://github.com/{{ logname }}/dotfiles.git
+    dest=/tmp/dotfiles
+
+- name: link to my home directory
+  copy: src=/tmp/dotfiles/{{ item }} dest=/home/jsh/{{ item }}
+    owner=jsh
+    group=jsh
+  with_items:
+    - .bash-aliases
+    - .bash-functions
+    - .bash-golang
+    - .bash-local
+    - .bash-mac
+    - .bash-variables
+
+- name: use the new dotfiles
+  blockinfile:
+    dest: /home/{{ logname }}/.bashrc
+    block: |
+      [[ -f ~/.bash-local ]] && . ~/.bash-local
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"

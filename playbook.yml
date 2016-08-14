@@ -4,69 +4,8 @@
   become: true
   become_method: sudo
 
-  tasks:
+  vars_files:
+    - vars/user.yml
 
-    - name: install ansible
-      dnf: name={{ item }} state=present
-      with_items:
-        - ansible
-        - python2-dnf
-
-    - name: install mp3 support
-      dnf: name={{ item }} state=present
-      with_items:
-        - ffmpeg
-        - libavdevice
-
-    - name: install video support
-      dnf: name=vlc state=present
-
-    - name: install media streaming
-      dnf: name={{ item }} state=present
-      with_items:
-        - gstreamer-plugins-bad
-        - gstreamer-plugins-bad-free-extras
-        - gstreamer-plugins-bad-nonfree
-        - gstreamer-plugins-ugly
-        - gstreamer-ffmpeg
-        - gstreamer1-libav
-        - gstreamer1-plugins-bad-free-extras
-        - gstreamer1-plugins-bad-freeworld
-        - gstreamer1-plugins-base-tools
-        - gstreamer1-plugins-good-extras
-        - gstreamer1-plugins-ugly
-        - gstreamer1-plugins-bad-free
-        - gstreamer1-plugins-good
-        - gstreamer1-plugins-base
-        - gstreamer1
-
-    - name: install virtualbox support
-      dnf: name={{ item }} state=present
-      with_items:
-        - dkms
-        - kernel-devel
-        - VirtualBox-5.1
-
-    - name: install vagrant support
-      dnf: name=vagrant-libvirt state=present
-
-    - name: install miscellaneous dev packages
-      dnf: name={{ item }} state=present
-      with_items:
-        - golang
-        - unrar
-        - vim-enhanced
-
-    - name: install miscellaneous workstation tools
-      dnf: name={{ item }} state=present
-      with_items:
-        - gnome-tweak-tool
-        - xclip
-
-    - name: install video support
-      dnf: name=vlc state=present
-
-    - name: upgrade all packages
-      dnf: name=* state=latest
-      tags:
-          - upgrades
+  roles:
+    - f24
