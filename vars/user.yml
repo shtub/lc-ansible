@@ -1,0 +1,4 @@
+---
+
+home: "{{ lookup('env','HOME') }}"
+logname: "{{ lookup('env', 'LOGNAME') }}"
