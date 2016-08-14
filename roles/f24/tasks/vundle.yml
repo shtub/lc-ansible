@@ -1,0 +1,19 @@
+---
+- name: install dotfiles
+  git:
+    name=https://github.com/VundleVim/Vundle.vim.git
+    dest=/tmp/Vundle.vim
+
+- name: copy to my home directory
+  copy:
+    src=/tmp/Vundle.vim/
+    dest=/home/{{ logname }}/.vim/bundle/Vundle.vim/
+    owner=jsh
+    group=jsh
+
+- name: install .vimrc
+  copy:
+    src=files/dot-vimrc
+    dest=/home/{{ logname }}/.vimrc
+    owner=jsh
+    group=jsh

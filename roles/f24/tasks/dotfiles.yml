@@ -4,7 +4,7 @@
     name=https://github.com/{{ logname }}/dotfiles.git
     dest=/tmp/dotfiles
 
-- name: link to my home directory
+- name: copy to my home directory
   copy: src=/tmp/dotfiles/{{ item }} dest=/home/jsh/{{ item }}
     owner=jsh
     group=jsh
