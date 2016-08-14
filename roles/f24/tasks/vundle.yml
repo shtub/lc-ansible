@@ -7,13 +7,13 @@
 - name: copy to my home directory
   copy:
     src=/tmp/Vundle.vim/
-    dest=/home/{{ logname }}/.vim/bundle/Vundle.vim/
+    dest="{{ home }}/.vim/bundle/Vundle.vim/"
     owner=jsh
     group=jsh
 
 - name: install .vimrc
   copy:
     src=files/dot-vimrc
-    dest=/home/{{ logname }}/.vimrc
+    dest="{{ home }}/.vimrc"
     owner=jsh
     group=jsh

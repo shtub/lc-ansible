@@ -5,7 +5,9 @@
     dest=/tmp/dotfiles
 
 - name: copy to my home directory
-  copy: src=/tmp/dotfiles/{{ item }} dest=/home/jsh/{{ item }}
+  copy:
+    src=/tmp/dotfiles/{{ item }}
+    dest="{{ home }}/{{ item }}"
     owner=jsh
     group=jsh
   with_items:
@@ -18,7 +20,7 @@
 
 - name: use the new dotfiles
   blockinfile:
-    dest: /home/{{ logname }}/.bashrc
+    dest: "{{ home }}/.bashrc"
     block: |
       [[ -f ~/.bash-local ]] && . ~/.bash-local
     marker: "# {mark} ANSIBLE MANAGED BLOCK"
