@@ -3,6 +3,7 @@
 #- name: nologin sudoer
 #  template: src=sudoer.j2 dest=/etc/sudoers.d/{{ logname }} mode=0440
 
-- include: tasks/dnf.yml
 - include: tasks/dotfiles.yml
+- include: tasks/dnf.yml
+- include: tasks/git.yml
 - include: tasks/vundle.yml

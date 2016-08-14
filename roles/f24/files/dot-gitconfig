@@ -1,0 +1,18 @@
+[alias]
+	index   = ls-files --stage
+	lol     = log --graph --decorate --oneline --all
+[color]
+	ui = auto
+[core]
+	attributesfile = ~/.gitattributes
+	autocrlf = input
+	excludesfile = ~/.gitignore
+	safecrlf = true
+	whitespace = trailing-space,space-before-tab
+[help]
+	autocorrect = 1
+[push]
+	default = simple
+[user]
+	name = Jeffrey S. Haemer
+	email = jeffrey.haemer@gmail.com

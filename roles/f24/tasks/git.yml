@@ -1,0 +1,12 @@
+---
+
+- name: get git-scratch
+  git:
+    name=https://github.com/{{ logname }}/git-scratch.git
+    dest=/usr/local/src/git-scratch
+
+- name: install git-scratch
+  command: chdir=/usr/local/src/git-scratch make install
+
+- name: configure git
+  copy: src=files/dot-gitconfig dest="{{ home }}/.gitconfig"
