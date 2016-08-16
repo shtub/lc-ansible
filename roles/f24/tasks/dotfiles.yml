@@ -1,5 +1,5 @@
 ---
-- name: install dotfiles
+- name: get dotfiles repo
   git:
     name=https://github.com/{{ logname }}/dotfiles.git
     dest=/tmp/dotfiles
