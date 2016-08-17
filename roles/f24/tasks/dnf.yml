@@ -1,4 +1,5 @@
 ---
+
 - name: install ansible
   dnf: name={{ item }} state=present
   with_items:
@@ -69,7 +70,33 @@
 - name: install video support
   dnf: name=vlc state=present
 
-- name: upgrade all packages
+- name: upgrade all packages to latest
   dnf: name=* state=latest
   tags:
       - upgrades
+
+- name: automate updates/upgrades
+  dnf: name=dnf-automatic state=present
+  tags: dnf-automatic
+
+- name: configure dnf-automatic
+  copy: src=files/automatic.conf dest=/etc/dnf/automatic.conf
+  tags: dnf-automatic
+
+  #- name: start dnf-automatic
+  #command: systemctl start dnf-automatic.service
+  #tags: dnf-automatic
+  #  systemd: name=dnf-automatic state=started
+
+  #- name: enable dnf-automatic
+  #command: systemctl enable dnf-automatic.service
+  #tags: dnf-automatic
+
+- name: start dnf-automatic timer
+  command: systemctl start dnf-automatic.timer
+  tags: dnf-automatic
+
+- name: enable dnf-automatic timer
+  command: systemctl enable dnf-automatic.timer
+  tags: dnf-automatic
+  
