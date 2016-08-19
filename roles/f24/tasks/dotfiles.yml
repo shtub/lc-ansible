@@ -1,22 +1,26 @@
 ---
+
 - name: get dotfiles repo
   git:
     name=https://github.com/{{ logname }}/dotfiles.git
-    dest=/tmp/dotfiles
+    dest="{{ home }}/Projects/dotfiles"
+    update=yes
+  become: true
+  become_user: "{{ logname }}"
+  tags:
+    - dotfiles
 
-- name: copy to my home directory
-  copy:
-    src=/tmp/dotfiles/{{ item }}
-    dest="{{ home }}/{{ item }}"
-    owner=jsh
-    group=jsh
+- name: symlink dotfiles
+  file: src="{{ home }}/Projects/dotfiles/.bash-{{ item }}" dest="{{ home }}/.bash-{{ item }}" state=link
   with_items:
-    - .bash-aliases
-    - .bash-functions
-    - .bash-golang
-    - .bash-local
-    - .bash-mac
-    - .bash-variables
+    - aliases
+    - functions
+    - golang
+    - local
+    - mac
+    - variables
+  tags:
+    - dotfiles
 
 - name: use the new dotfiles
   blockinfile:
@@ -24,3 +28,5 @@
     block: |
       [[ -f ~/.bash-local ]] && . ~/.bash-local
     marker: "# {mark} ANSIBLE MANAGED BLOCK"
+  tags:
+    - dotfiles

@@ -1,12 +1,30 @@
 ---
 
-- name: get git-scratch
+- name: get git-scratch repo
   git:
     name=https://github.com/{{ logname }}/git-scratch.git
-    dest=/usr/local/src/git-scratch
+    dest="{{ home }}/Projects/git-scratch"
+    update=yes
+  become: true
+  become_user: "{{ logname }}"
+  tags:
+    - git
 
-- name: install git-scratch
-  command: chdir=/usr/local/src/git-scratch make install
+- name: make /usr/local/bin, if necessary
+  file: name=/usr/local/bin state=directory
+  tags:
+    - git
+
+- name: install git-scratch and friends
+  file: src="{{ home }}/Projects/git-scratch/git-{{ item }}" dest=/usr/local/bin/git-{{ item }} state=link
+  with_items:
+    - addfile
+    - first
+    - scratch
+  tags:
+    - git
 
 - name: configure git
   copy: src=files/dot-gitconfig dest="{{ home }}/.gitconfig"
+  tags:
+    - git
