@@ -2,14 +2,20 @@
 - name: get vundle repo
   git:
     name=https://github.com/VundleVim/Vundle.vim.git
-    dest=/tmp/Vundle.vim
+    dest="{{ home }}/Projects/Vundle.vim"
+    update=yes
+  become: true
+  become_user: "{{ logname }}"
+  tags:
+    - vundle
 
-- name: copy to my home directory
-  copy:
-    src=/tmp/Vundle.vim/
-    dest="{{ home }}/.vim/bundle/Vundle.vim/"
-    owner=jsh
-    group=jsh
+- name: symlink Vundle.vim to my home directory
+  file:
+    src="{{ home }}/Projects/Vundle.vim/"
+    dest="{{ home }}/.vim/bundle/Vundle.vim"
+    state=link
+  tags:
+    - vundle
 
 - name: install .vimrc
   copy:
@@ -17,3 +23,5 @@
     dest="{{ home }}/.vimrc"
     owner=jsh
     group=jsh
+  tags:
+    - vundle
