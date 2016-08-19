@@ -41,19 +41,6 @@
     - gstreamer1-plugins-base
     - gstreamer1
 
-- name: add vbox config repo
-  command: dnf config-manager --add-repo=http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
-
-- name: install virtualbox support
-  dnf: name={{ item }} state=present
-  with_items:
-    - dkms
-    - kernel-devel
-    - VirtualBox-5.1
-
-- name: install vagrant support
-  dnf: name=vagrant-libvirt state=present
-
 - name: install miscellaneous dev packages
   dnf: name={{ item }} state=present
   with_items:
@@ -82,21 +69,3 @@
 - name: configure dnf-automatic
   copy: src=files/automatic.conf dest=/etc/dnf/automatic.conf
   tags: dnf-automatic
-
-  #- name: start dnf-automatic
-  #command: systemctl start dnf-automatic.service
-  #tags: dnf-automatic
-  #  systemd: name=dnf-automatic state=started
-
-  #- name: enable dnf-automatic
-  #command: systemctl enable dnf-automatic.service
-  #tags: dnf-automatic
-
-- name: start dnf-automatic timer
-  command: systemctl start dnf-automatic.timer
-  tags: dnf-automatic
-
-- name: enable dnf-automatic timer
-  command: systemctl enable dnf-automatic.timer
-  tags: dnf-automatic
-  
