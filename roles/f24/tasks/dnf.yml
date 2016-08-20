@@ -64,8 +64,15 @@
 
 - name: automate updates/upgrades
   dnf: name=dnf-automatic state=present
-  tags: dnf-automatic
+  tags:
+    - dnf-automatic
 
 - name: configure dnf-automatic
   copy: src=files/automatic.conf dest=/etc/dnf/automatic.conf
-  tags: dnf-automatic
+  tags:
+    - dnf-automatic
+
+- name: enable dnf-automatic timer
+  service: name=dnf-automatic.timer enabled=yes state=started
+  tags:
+    - dnf-automatic

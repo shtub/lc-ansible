@@ -1,9 +1,0 @@
----
-
-- name: enable sshd
-  service: name=sshd enabled=yes state=started
-  tags: ssh
-
-- name: enable dnf-automatic timer
-  service: name=dnf-automatic.timer enabled=yes state=started
-  tags: dnf-automatic

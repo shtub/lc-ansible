@@ -1,0 +1,21 @@
+---
+
+- name: install docker
+  dnf: name=docker state=present
+  tags:
+    - docker
+
+- name: start docker
+  service: name=docker enabled=yes state=started
+  tags:
+    - docker
+
+- name: create a docker group
+  group: name=docker state=present
+  tags:
+    - docker
+
+- name: add self to docker group
+  user: name={{ logname }} append=yes groups=docker
+  tags:
+    - docker

@@ -7,6 +7,6 @@
 - include: tasks/gnome3.yml
 - include: tasks/dnf.yml
 - include: tasks/git.yml
+- include: tasks/docker.yml
 - include: tasks/vbox.yml
 - include: tasks/vundle.yml
-- include: tasks/systemctl.yml
