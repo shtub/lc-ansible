@@ -1,0 +1,10 @@
+---
+# debug
+
+- block:
+
+  - name: debugging message
+    debug: msg=hello
+
+  tags:
+  - debug

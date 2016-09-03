@@ -1,0 +1,13 @@
+---
+# automate upgrades
+
+- block:
+
+  - name: automate updates/upgrades
+    dnf: name=dnf-automatic state=present
+
+  - name: configure dnf-automatic
+    copy: src=files/automatic.conf dest=/etc/dnf/automatic.conf
+
+  tags:
+    - dnf-automatic

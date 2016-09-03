@@ -1,11 +1,14 @@
 ---
 
-- hosts: all
-  become: true
-  become_method: sudo
+- name: set up host with standard environment
+  hosts: localhost
+  connection: local
+  become: True
+  become_user: root
 
   vars_files:
     - vars/user.yml
 
   roles:
-    - f24
+    - common
+    - { role: f24, when: ansible_os_family == 'RedHat' }

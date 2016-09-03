@@ -1,11 +1,15 @@
 ---
+# gnome 3 customization
 
-- name: enable repo for native host connector
-  command: dnf copr -y enable region51/chrome-gnome-shell
-  tags:
-    - gnome3
+- block:
 
-- name: install chrome-gnome-shell
-  dnf: name=chrome-gnome-shell state=present
+  - name: enable repo for native host connector
+    command: dnf copr -y enable region51/chrome-gnome-shell
+    tags:
+      - gnome3
+
+  - name: install chrome-gnome-shell
+    dnf: name=chrome-gnome-shell state=present
+
   tags:
     - gnome3

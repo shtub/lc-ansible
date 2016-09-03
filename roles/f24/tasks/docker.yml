@@ -1,21 +1,19 @@
 ---
+# docker installation and config
 
-- name: install docker
-  dnf: name=docker state=present
-  tags:
-    - docker
+- block:
 
-- name: start docker
-  service: name=docker enabled=yes state=started
-  tags:
-    - docker
+  - name: install docker
+    dnf: name=docker state=present
 
-- name: create a docker group
-  group: name=docker state=present
-  tags:
-    - docker
+  - name: start docker
+    service: name=docker enabled=yes state=started
 
-- name: add self to docker group
-  user: name={{ logname }} append=yes groups=docker
+  - name: create a docker group
+    group: name=docker state=present
+
+  - name: add self to docker group
+    user: name={{ logname }} append=yes groups=docker
+
   tags:
-    - docker
+  - docker

@@ -1,12 +1,12 @@
 ---
+# main tasks for f24
 
 #- name: nologin sudoer
 #  template: src=sudoer.j2 dest=/etc/sudoers.d/{{ logname }} mode=0440
 
-- include: tasks/dotfiles.yml
-- include: tasks/gnome3.yml
-- include: tasks/dnf.yml
-- include: tasks/git.yml
 - include: tasks/docker.yml
+- include: tasks/gnome3.yml
+- include: tasks/packages.yml
+- include: tasks/sshd.yml
+- include: tasks/upgrades.yml
 - include: tasks/vbox.yml
-- include: tasks/vundle.yml

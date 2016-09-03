@@ -1,0 +1,24 @@
+---
+# configure vi
+
+- block:
+
+  - name: get vundle repo
+    git:
+      name: https://github.com/VundleVim/Vundle.vim.git
+      dest: "{{ home }}/Projects/Vundle.vim"
+      update: yes
+    become: true
+    become_user: "{{ logname }}"
+  
+  - name: symlink Vundle.vim to my home directory
+    file:
+      src: "{{ home }}/Projects/Vundle.vim/"
+      dest: "{{ home }}/.vim/bundle/Vundle.vim"
+      state: link
+  
+  - name: install .vimrc
+    copy: src=files/dot-vimrc dest="{{ home }}/.vimrc"
+
+  tags:
+  - vundle

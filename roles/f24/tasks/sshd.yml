@@ -1,7 +1,11 @@
 ---
+# sshd
 
-- name: enable sshd
-  service: name=sshd enabled=yes state=started
+- block:
+
+  - name: enable sshd
+    service: name=sshd enabled=yes state=started
+
   tags:
-    - ssh
+  - ssh
 
