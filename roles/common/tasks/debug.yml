@@ -11,8 +11,6 @@
 
   - name: create /tmp/foo
     file: path=/tmp/foo state=touch
-    become: true
-    become_user: "{{ logname }}"
 
   - name: remove hello repo
     file: dest="{{ home }}/Projects/hello" state=absent
@@ -22,8 +20,38 @@
       name: https://github.com/{{ logname }}/hello.git
       dest: "{{ home }}/Projects/hello"
       update: yes
-    become: true
-    become_user: "{{ logname }}"
+
+  become: true
+  become_user: "{{ logname }}"
 
   tags:
   - debug
+
+- block:
+
+  - name: remove /tmp/bar
+    file: path=/tmp/bar state=absent
+
+  - name: create /tmp/bar
+    file: path=/tmp/bar state=touch
+
+  become: true
+  become_user: root
+
+  tags:
+  - debug2
+
+
+- block:
+
+  - name: remove /tmp/mumble
+    file: path=/tmp/mumble state=absent
+
+  - name: create /tmp/mumble
+    file: path=/tmp/mumble state=touch
+
+# note no becomes
+
+  tags:
+  - debug3
+
