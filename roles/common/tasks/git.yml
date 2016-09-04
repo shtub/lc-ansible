@@ -15,7 +15,12 @@
     file: name=/usr/local/bin state=directory
   
   - name: install git-scratch and friends
-    file: src="{{ home }}/Projects/git-scratch/git-{{ item }}" dest=/usr/local/bin/git-{{ item }} state=link
+    file:
+      src: "{{ home }}/Projects/git-scratch/git-{{ item }}"
+      dest: /usr/local/bin/git-{{ item }}
+      state: link
+    become: true
+    become_user: "{{ logname }}"
     with_items:
     - addfile
     - first
@@ -26,6 +31,8 @@
 
   - name: configure git
     copy: src=files/dot-gitconfig dest="{{ home }}/.gitconfig"
+    become: true
+    become_user: "{{ logname }}"
 
   tags:
   - git

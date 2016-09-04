@@ -4,7 +4,7 @@
 - block:
 
   - name: get basic packages
-    homebrew: name={{ item }} state=present
+    homebrew: name={{ item }} state=latest owner="{{ logname }}" group="{{ groupname }}"
     with_items:
     - ansible
     - bash
@@ -29,8 +29,12 @@
     - watch
     - wget
 
+#  - name: update homebrew and upgrade all packages
+#    homebrew: update_homebrew=yes upgrade_all=yes
+
   - name: update homebrew and upgrade all packages
-    homebrew: update_homebrew=yes upgrade_all=yes
+    command: "brew update"
 
   tags:
   - packages
+
