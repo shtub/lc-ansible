@@ -2,13 +2,14 @@
 
 - name: set up host with standard environment
   hosts: localhost
+  #hosts: localhost ansible_become=true ansible_become_user=root
+
   connection: local
-  become: True
-  become_user: root
 
   vars_files:
     - vars/user.yml
 
   roles:
     - common
-    - { role: f24, when: ansible_os_family == 'RedHat' }
+    - { role: f24,     when: ansible_os_family == 'RedHat' }
+    - { role: macbook, when: ansible_os_family == 'Darwin' }
