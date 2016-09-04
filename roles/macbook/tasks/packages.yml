@@ -28,14 +28,12 @@
     - tree
     - watch
     - wget
-    become: true
-    become_user: "{{ logname }}"
 
   - name: update homebrew and upgrade all packages
     homebrew: update_homebrew=yes upgrade_all=yes
-    become: true
-    become_user: "{{ logname }}"
 
+  become: true
+  become_user: "{{ logname }}"
   tags:
   - packages
 

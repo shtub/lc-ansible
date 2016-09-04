@@ -8,19 +8,17 @@
       name: https://github.com/{{ logname }}/git-scratch.git
       dest: "{{ home }}/Projects/git-scratch"
       update: yes
-    become: true
-    become_user: "{{ logname }}"
   
   - name: make /usr/local/bin, if necessary
-    file: name=/usr/local/bin state=directory
+    file: name=/usr/local/bin state=directory mode=0777
+    become: true
+    become_user: root
   
   - name: install git-scratch and friends
     file:
       src: "{{ home }}/Projects/git-scratch/git-{{ item }}"
       dest: /usr/local/bin/git-{{ item }}
       state: link
-    become: true
-    become_user: "{{ logname }}"
     with_items:
     - addfile
     - first
@@ -31,8 +29,8 @@
 
   - name: configure git
     copy: src=files/dot-gitconfig dest="{{ home }}/.gitconfig"
-    become: true
-    become_user: "{{ logname }}"
 
+  become: true
+  become_user: "{{ logname }}"
   tags:
   - git
