@@ -2,7 +2,8 @@
 
 - name: set up host with standard environment
   hosts: localhost
-  #hosts: localhost ansible_become=true ansible_become_user=root
+  #become: true
+  #become_user: root
 
   connection: local
 
