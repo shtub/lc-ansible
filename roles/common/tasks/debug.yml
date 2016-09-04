@@ -4,7 +4,26 @@
 - block:
 
   - name: debugging message
-    debug: msg=hello
+    debug: msg="hello {{ logname }}"
+
+  - name: remove /tmp/foo
+    file: path=/tmp/foo state=absent
+
+  - name: create /tmp/foo
+    file: path=/tmp/foo state=touch
+    become: true
+    become_user: "{{ logname }}"
+
+  - name: remove hello repo
+    file: dest="{{ home }}/Projects/hello" state=absent
+
+  - name: get hello repo
+    git:
+      name: https://github.com/{{ logname }}/hello.git
+      dest: "{{ home }}/Projects/hello"
+      update: yes
+    become: true
+    become_user: "{{ logname }}"
 
   tags:
   - debug
