@@ -5,7 +5,7 @@
 - name: include subtasks
   include: "{{ subtask }}"
   with_items:
-  - debug.yml
+#  - debug.yml
   - dotfiles.yml
   - git.yml
   - vundle.yml

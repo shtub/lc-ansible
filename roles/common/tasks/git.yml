@@ -5,19 +5,17 @@
 
   - name: get git-scratch repo
     git:
-      name: https://github.com/{{ logname }}/git-scratch.git
+      name: https://github.com/jsh/git-scratch.git
       dest: "{{ home }}/Projects/git-scratch"
       update: yes
   
-  - name: make /usr/local/bin, if necessary
-    file: name=/usr/local/bin state=directory mode=0777
-    become: true
-    become_user: root
+  - name: make ~/bin, if necessary
+    file: name=~/bin state=directory mode=0777
   
   - name: install git-scratch and friends
     file:
       src: "{{ home }}/Projects/git-scratch/git-{{ item }}"
-      dest: /usr/local/bin/git-{{ item }}
+      dest: ~/bin/git-{{ item }}
       state: link
     with_items:
     - addfile

@@ -12,7 +12,7 @@
 [help]
 	autocorrect = 1
 [push]
-	default = simple
+	default = current
 [user]
-	name = Jeffrey S. Haemer
-	email = jeffrey.haemer@gmail.com
+	name = Jeff Haemer
+	email = jshaemer@twitter.com

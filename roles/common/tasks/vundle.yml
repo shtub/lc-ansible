@@ -8,6 +8,9 @@
       name: https://github.com/VundleVim/Vundle.vim.git
       dest: "{{ home }}/Projects/Vundle.vim"
       update: yes
+
+  - name: make a directory for my vim bundles
+    file: name="{{ home }}/.vim/bundle" state=directory
   
   - name: symlink Vundle.vim to my home directory
     file:

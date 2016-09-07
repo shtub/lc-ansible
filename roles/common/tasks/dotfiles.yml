@@ -4,7 +4,7 @@
 - block:
   - name: get dotfiles repo
     git:
-      name=https://github.com/{{ logname }}/dotfiles.git
+      name=https://github.com/jsh/dotfiles.git
       dest="{{ home }}/Projects/dotfiles"
       update=yes
   
@@ -16,15 +16,17 @@
     - golang
     - local
     - mac
-    - variables
-  
+   
+  - name: make .bashrc if I need to
+    file: path="{{ home }}/.bashrc" state=touch
+
   - name: use the new dotfiles
     blockinfile:
       dest: "{{ home }}/.bashrc"
       block: |
         [[ -r ~/.bash-local ]] && . ~/.bash-local
       marker: "# {mark} ANSIBLE MANAGED BLOCK"
-  
+
   become: true
   become_user: "{{ logname }}"
   tags:

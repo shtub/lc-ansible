@@ -15,19 +15,15 @@
     - docker
     - gcc
     - gettext
-    - git
     - go
     - md5sha1sum
     - mtr
-    - openssl
     - pstree
-    - python
     - readline
     - sloccount
     - ssh-copy-id
     - tree
     - watch
-    - wget
 
   - name: update homebrew and upgrade all packages
     homebrew: update_homebrew=yes upgrade_all=yes
