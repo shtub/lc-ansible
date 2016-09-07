@@ -10,7 +10,7 @@
       update: yes
   
   - name: make ~/bin, if necessary
-    file: name=~/bin state=directory mode=0777
+    file: name=~/bin state=directory mode=0755
   
   - name: install git-scratch and friends
     file:
